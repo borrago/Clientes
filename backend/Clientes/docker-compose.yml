@@ -1,0 +1,74 @@
+﻿version: '3.5'
+services:
+
+  nginx:
+    container_name: "NGinx"
+    image: nginx:latest
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - Clientes
+    depends_on:
+      - clientes
+  
+  clientes:
+    container_name: clientes
+    build:
+      context: .
+    ports:
+      - 8080:80
+    environment:
+      - ConnectionStrings__SqlServerConn=${DefaultConnection}
+      - MongoDbSettings__MongoDbConn=${MongoDbConn}
+      - MongoDbSettings__DatabaseName=${DatabaseName}
+      - ASPNETCORE_ENVIRONMENT=${Environment}
+      - ASPNETCORE_HTTP_PORTS=${PORT}
+    depends_on:
+      - db
+      - mongodb
+    networks:
+      - Clientes
+    volumes:
+      - keys:/root/.aspnet/DataProtection-Keys
+      
+  db:
+    container_name: "db"
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    ports:
+      - "8001:1433"
+    volumes:
+      - db:/var/opt/mssql
+      - ./configure-remote-access.sql:/docker-entrypoint-initdb.d/configure-remote-access.sql
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+      SA_PASSWORD: "${PassDBA}"
+    networks:
+      - Clientes
+
+  mongodb:
+    container_name: "mongodb"
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - Clientes
+      
+volumes:
+  keys:
+  mongodb_data:
+
+  db:
+    name: db
+    external: false
+    
+networks:
+  Clientes:
+    name: Clientes
+    driver: bridge

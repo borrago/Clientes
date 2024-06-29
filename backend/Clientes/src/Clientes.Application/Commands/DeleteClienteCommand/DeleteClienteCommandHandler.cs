@@ -12,7 +12,7 @@ public class DeleteClienteCommandHandler(IClientesRepository clientesRepository,
 
     public async Task<bool> Handle(DeleteClienteCommandInput request, CancellationToken cancellationToken)
     {
-        var cliente = await _clientesRepository.Get(g => g.Id == request.Id).SingleOrDefaultAsync(cancellationToken);
+        var cliente = await _clientesRepository.GetAsync(g => g.Id == request.Id, cancellationToken);
 
         if (cliente is null)
             return false;

@@ -6,6 +6,7 @@ using Clientes.Infra.Repositories.ClientesRepository;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 
@@ -51,6 +52,25 @@ builder.Services.AddValidatorsFromAssemblyContaining<AddClienteCommandValidator>
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FailFastPipeLineBehaviors<,>));
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<SqlServerDbContext>();
+    var loggerFactory = LoggerFactory.Create(builder =>
+    {
+        builder.AddConsole();
+    });
+    var logger = loggerFactory.CreateLogger<Program>();
+    try
+    {
+        dbContext.Database.Migrate();
+        logger.LogInformation("Banco de dados migrado com sucesso.");
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "Ocorreu um erro ao migrar o banco de dados.");
+    }
+}
 
 app.UseMiddleware<ExceptionMiddleware>();
 

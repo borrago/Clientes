@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Clientes.Application.Commands.UpdateClienteCommand;
 
-public class AtualizarClienteCommandValidator : AbstractValidator<UpdateClienteCommandInput>
+public class UpdateClienteCommandValidator : AbstractValidator<UpdateClienteCommandInput>
 {
-    public AtualizarClienteCommandValidator()
+    public UpdateClienteCommandValidator()
     {
         RuleFor(x => x.NomeEmpresa)
              .MaximumLength(250)

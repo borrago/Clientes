@@ -2,6 +2,11 @@
 
 Esse projeto é uma implementação de API de clientes seguindo princípios dd Domain-Driven Design (DDD) e Command Query Responsibility Segregation (CQRS).
 
+# Execução simplificada
+
+1 - Instalar docker
+2 - Executar arquivo "up.bat"
+
 ## Tecnologias Utilizadas
 
 - .NET Core 8: Framework utilizado para o desenvolvimento da aplicação.

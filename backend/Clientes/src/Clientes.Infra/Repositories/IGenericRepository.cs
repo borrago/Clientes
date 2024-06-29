@@ -6,7 +6,7 @@ namespace Clientes.Infra.Repositories;
 
 public interface IGenericRepository<TEntity> : IRepository where TEntity : IEntity
 {
-    IQueryable<TEntity> Get(Expression<Func<TEntity, bool>>? predicate = null);
+    Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default);
     void Add(TEntity entity);
     Task AddAsync(TEntity entity, CancellationToken cancellationToken);
     void Update(TEntity entity);

@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Clientes.Application.Commands.UpdateClienteCommand;
 
-public class AtualizarClienteCommandHandler(
-    IMediator mediator,
-    IClientesRepository clientesRepository) : IRequestHandler<UpdateClienteCommandInput, bool>
+public class UpdateClienteCommandHandler(
+    IClientesRepository clientesRepository,
+    IMediator mediator) : IRequestHandler<UpdateClienteCommandInput, bool>
 {
 
     private readonly IMediator _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
@@ -15,7 +15,7 @@ public class AtualizarClienteCommandHandler(
 
     public async Task<bool> Handle(UpdateClienteCommandInput request, CancellationToken cancellationToken)
     {
-        var cliente = await _clientesRepository.Get(g => g.Id == request.Id).SingleOrDefaultAsync(cancellationToken);
+        var cliente = await _clientesRepository.GetAsync(g => g.Id == request.Id, cancellationToken);
 
         if (cliente is null)
             return false;

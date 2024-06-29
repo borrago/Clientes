@@ -12,7 +12,7 @@ public abstract class GenericRepository<TEntity>(SqlServerDbContext context) : I
 
     public IUnitOfWork UnitOfWork => _context;
 
-    public IQueryable<TEntity> Get(Expression<Func<TEntity, bool>>? predicate = null)
+    public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default)
     {
         var query = _context
             .Set<TEntity>()
@@ -21,7 +21,7 @@ public abstract class GenericRepository<TEntity>(SqlServerDbContext context) : I
         if (predicate != null)
             query = query.Where(predicate);
 
-        return query;
+        return await query.FirstOrDefaultAsync(cancellationToken);
     }
 
     public void Add(TEntity entity) 

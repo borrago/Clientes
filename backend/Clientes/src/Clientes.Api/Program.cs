@@ -51,6 +51,17 @@ builder.Services.AddValidatorsFromAssemblyContaining<AddClienteCommandValidator>
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FailFastPipeLineBehaviors<,>));
 
+// Configuração do CORS permitindo todas as origens
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -81,6 +92,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Use the CORS policy
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 

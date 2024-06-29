@@ -1,6 +1,8 @@
-﻿namespace Clientes.Domain.ClientAggregate;
+﻿using Clientes.Domain.DomainObjects;
 
-public class ClienteModel
+namespace Clientes.Domain.ClientAggregate;
+
+public class ClienteModel : IMongoEntity
 {
     public Guid Id { get; set; }
     public string NomeEmpresa { get; set; } = string.Empty;

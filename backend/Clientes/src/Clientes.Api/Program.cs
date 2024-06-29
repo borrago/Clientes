@@ -38,7 +38,7 @@ builder.Services.AddSingleton(sp =>
 
 // Configuração dos repositórios
 builder.Services.AddScoped<IClientesRepository, ClientesRepository>();
-builder.Services.AddScoped<IClienteProjectionRepository, ClienteProjectionRepository>();
+builder.Services.AddScoped<IClienteMongoRepository, ClienteMongoRepository>();
 
 // Configuração do MediatR
 builder.Services.AddMediatR(cfg =>

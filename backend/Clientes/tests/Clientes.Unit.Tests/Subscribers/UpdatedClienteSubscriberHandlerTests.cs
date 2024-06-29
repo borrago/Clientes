@@ -9,13 +9,13 @@ namespace Clientes.Unit.Tests.Subscribers;
 
 public class UpdatedClienteSubscriberHandlerTests
 {
-    private readonly Mock<IClienteProjectionRepository> _clientesRepository;
+    private readonly Mock<IClienteMongoRepository> _clientesRepository;
     private readonly Mock<ILogger<UpdatedClienteSubscriber>> _loggerMock;
     private readonly UpdatedClienteSubscriber _handler;
 
     public UpdatedClienteSubscriberHandlerTests()
     {
-        _clientesRepository = new Mock<IClienteProjectionRepository>();
+        _clientesRepository = new Mock<IClienteMongoRepository>();
         _loggerMock = new Mock<ILogger<UpdatedClienteSubscriber>>();
         _handler = new UpdatedClienteSubscriber(_loggerMock.Object, _clientesRepository.Object);
     }

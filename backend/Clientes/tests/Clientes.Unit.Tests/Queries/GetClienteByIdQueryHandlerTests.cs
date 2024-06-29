@@ -9,14 +9,14 @@ namespace Clientes.Unit.Tests.Queries;
 
 public class GetClienteByIdQueryHandlerTests
 {
-    private readonly Mock<IClienteProjectionRepository> _clientesRepositoryMock;
+    private readonly Mock<IClienteMongoRepository> _clientesRepositoryMock;
     private readonly Mock<IMediator> _mediatorMock;
     private readonly GetClienteByIdQueryHandler _handler;
     private readonly Mock<IUnitOfWork> _unitOfWorkMock;
 
     public GetClienteByIdQueryHandlerTests()
     {
-        _clientesRepositoryMock = new Mock<IClienteProjectionRepository>();
+        _clientesRepositoryMock = new Mock<IClienteMongoRepository>();
         _mediatorMock = new Mock<IMediator>();
         _unitOfWorkMock = new Mock<IUnitOfWork>();
         _handler = new GetClienteByIdQueryHandler(_clientesRepositoryMock.Object);

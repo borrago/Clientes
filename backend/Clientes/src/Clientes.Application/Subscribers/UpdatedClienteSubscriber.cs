@@ -8,10 +8,10 @@ namespace Clientes.Application.Subscribers;
 
 public class UpdatedClienteSubscriber(
     ILogger<UpdatedClienteSubscriber> logger,
-    IClienteProjectionRepository clientesRepository
+    IClienteMongoRepository clientesRepository
     ) : INotificationHandler<UpdatedClienteEventInput>
 {
-    private readonly IClienteProjectionRepository _clientesRepository = clientesRepository ?? throw new ArgumentNullException(nameof(clientesRepository));
+    private readonly IClienteMongoRepository _clientesRepository = clientesRepository ?? throw new ArgumentNullException(nameof(clientesRepository));
     private readonly ILogger<UpdatedClienteSubscriber> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
     public async Task Handle(UpdatedClienteEventInput notification, CancellationToken cancellationToken)

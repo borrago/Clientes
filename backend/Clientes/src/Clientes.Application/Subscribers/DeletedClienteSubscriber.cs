@@ -7,10 +7,10 @@ namespace Clientes.Application.Subscribers;
 
 public class DeletedClienteSubscriber(
     ILogger<DeletedClienteSubscriber> logger,
-    IClienteProjectionRepository clientesRepository
+    IClienteMongoRepository clientesRepository
     ) : INotificationHandler<DeletedClienteEventInput>
 {
-    private readonly IClienteProjectionRepository _clientesRepository = clientesRepository ?? throw new ArgumentNullException(nameof(clientesRepository));
+    private readonly IClienteMongoRepository _clientesRepository = clientesRepository ?? throw new ArgumentNullException(nameof(clientesRepository));
     private readonly ILogger<DeletedClienteSubscriber> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
     public async Task Handle(DeletedClienteEventInput notification, CancellationToken cancellationToken)

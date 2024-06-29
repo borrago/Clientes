@@ -16,7 +16,7 @@ Esse projeto é uma implementação de API de clientes seguindo princípios dd D
 - MediatR: Para mensageria interna e implementação do padrão CQRS.
 - Swagger: Para documentação e testes da API.
 - FluentValidation: Para validação de comandos.
-- xUnit e NSubstitute: Para testes unitários no backend.
+- xUnit e Moq: Para testes unitários no backend.
 
 ## Arquitetura
 
@@ -79,7 +79,7 @@ Clientes/
 
 #### Testes Unitários
 
-Os testes unitários para comandos, consultas e manipuladores de eventos são implementados utilizando xUnit e NSubstitute para mock. Estes testes garantem a integridade das operações de criação, leitura, atualização e exclusão (CRUD) e a correta publicação de eventos.
+Os testes unitários para comandos, consultas e manipuladores de eventos são implementados utilizando xUnit e Moq para mock. Estes testes garantem a integridade das operações de criação, leitura, atualização e exclusão (CRUD) e a correta publicação de eventos.
 
 ##### Executando os Testes
 

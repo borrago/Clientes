@@ -2,15 +2,21 @@ import { Environment } from "../../../environments";
 import { Api } from "../axios-config";
 
 export interface IListagemCliente {
-    id: number;
+    id: string;
     nomeEmpresa: string;
     porte: string;
 }
 
 export interface IDetalheCliente {
-    id: number;
+    id: string;
     nomeEmpresa: string;
     porte: string;
+}
+
+export interface IDetalheClienteIn {
+    id: string;
+    nomeEmpresa: string;
+    porte: number;
 }
 
 type TClientesComTotalCount = {
@@ -38,7 +44,7 @@ const getAll = async (page = 1, filter = ''): Promise<TClientesComTotalCount | E
     }
 }
 
-const getById = async (id: number): Promise<IDetalheCliente | Error> => { 
+const getById = async (id: string): Promise<IDetalheCliente | Error> => { 
     try {
         const { data } = await Api.get(`/clientes/${id}`);
 
@@ -54,12 +60,13 @@ const getById = async (id: number): Promise<IDetalheCliente | Error> => {
     }
 }
 
-const create = async (cliente: Omit<IDetalheCliente, 'id'>): Promise<number | Error> => { 
+const create = async (cliente: Omit<IDetalheClienteIn, 'id'>): Promise<string | Error> => { 
     try {
-        const { data } = await Api.post<IDetalheCliente>('/clientes', cliente);
+        //const { data } = await Api.post<IDetalheCliente>('/clientes', cliente);
+        const { data } = await Api.post<string>('/clientes', cliente);
 
         if (data) {
-            return data.id;
+            return data;
         }
 
         return new Error('Erro ao consultar o registro');
@@ -70,7 +77,7 @@ const create = async (cliente: Omit<IDetalheCliente, 'id'>): Promise<number | Er
     }
 }
 
-const updateById = async (id: number, dados: IDetalheCliente): Promise<void | Error> => {
+const updateById = async (id: string, dados: IDetalheClienteIn): Promise<void | Error> => {
     try {
        await Api.put(`/clientes/${id}`, dados);
     } catch(error) {
@@ -80,7 +87,7 @@ const updateById = async (id: number, dados: IDetalheCliente): Promise<void | Er
     }
  }
 
-const deleteById = async (id: number): Promise<void | Error> => { 
+const deleteById = async (id: string): Promise<void | Error> => { 
     try {
         await Api.delete(`/clientes/${id}`);
     } catch(error) {

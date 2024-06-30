@@ -44,7 +44,7 @@ export const ListagemDeClientes:React.FC = () => {
         })
     }, [busca, pagina]);
 
-    const handleDelete = (id: number) => {
+    const handleDelete = (id: string) => {
         //if (confirm('Realmente deseja apagar?')){
             ClientesService.deleteById(id)
             .then(result => {
@@ -67,7 +67,8 @@ export const ListagemDeClientes:React.FC = () => {
                 <FerramentasDaListagem 
                     mostrarInputBusca
                     textoDaBusca={busca}
-                    textoBotaoNovo="Nova"
+                    textoBotaoNovo="Novo"
+                    aoClicarEmNovo={() => navigate('/clientes/detalhe/nova')}
                     aoMudarTextoDeBusca={texto => setSearchParams({busca: texto, pagina: '1' }, {replace: true})}
                 />
             }

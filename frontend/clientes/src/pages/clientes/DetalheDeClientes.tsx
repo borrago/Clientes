@@ -77,6 +77,8 @@ export const DetalheDeClientes: React.FC = () => {
     };
 
     const handleSave = (dados: IFormData) => {
+        dados.porte = mapPorteToValueSelect(dados.porte.toString())
+
         formValidationSchema.
             validate(dados, { abortEarly: false })
             .then((dadosValidados) => {
@@ -193,11 +195,12 @@ export const DetalheDeClientes: React.FC = () => {
                                 label="Porte"
                                 name="porte"
                                 onChange={e => setPorte(mapPorteToValue(e.target.value))}
-                            >
-                                <MenuItem value={1}>Pequena</MenuItem>
-                                <MenuItem value={2}>Media</MenuItem>
-                                <MenuItem value={3}>Grande</MenuItem>
-                            </VSelect>
+                                options={[
+                                    { id: "1", label: 'Pequena' },
+                                    { id: "2", label: 'Media' },
+                                    { id: "3", label: 'Grande' },
+                                  ]}
+                            />
                         </Grid>
 
                     </Grid>

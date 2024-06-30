@@ -182,20 +182,17 @@ export const DetalheDeClientes: React.FC = () => {
                                     disabled={isLoading}
                                     label='Nome empresa'
                                     onChange={e => setNome(e.target.value)}
-                                    variant="outlined"
                                 />
                             </Grid>
                         </Grid>
 
                         <Grid item xs={12}>
                             <VSelect
-                                select
                                 fullWidth
                                 disabled={isLoading}
                                 label="Porte"
                                 name="porte"
                                 onChange={e => setPorte(mapPorteToValue(e.target.value))}
-                                variant="outlined"
                             >
                                 <MenuItem value={1}>Pequena</MenuItem>
                                 <MenuItem value={2}>Media</MenuItem>

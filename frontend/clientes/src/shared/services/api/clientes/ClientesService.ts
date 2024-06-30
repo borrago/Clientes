@@ -24,12 +24,12 @@ type TClientesComTotalCount = {
     totalCount: number;
 }
 
-const getAll = async (page = 1, filter = ''): Promise<TClientesComTotalCount | Error> => { 
+const getAll = async (page = 1, filter = ''): Promise<TClientesComTotalCount | Error> => {
     try {
         const urlRelativa = `/clientes`
         const { data, headers } = await Api.get(urlRelativa);
 
-       if (data) {
+        if (data) {
             return {
                 data,
                 totalCount: Number(headers['x-total-count']) || Environment.LIMITE_DE_LINHAS,
@@ -37,14 +37,14 @@ const getAll = async (page = 1, filter = ''): Promise<TClientesComTotalCount | E
         }
 
         return new Error('Erro ao listar os registros');
-    } catch(error) {
+    } catch (error) {
         console.error(error);
 
-        return new Error((error as {message: string }).message || 'Erro ao listar os registros');
+        return new Error((error as { message: string }).message || 'Erro ao listar os registros');
     }
 }
 
-const getById = async (id: string): Promise<IDetalheCliente | Error> => { 
+const getById = async (id: string): Promise<IDetalheCliente | Error> => {
     try {
         const { data } = await Api.get(`/clientes/${id}`);
 
@@ -53,14 +53,14 @@ const getById = async (id: string): Promise<IDetalheCliente | Error> => {
         }
 
         return new Error('Erro ao consultar o registro');
-    } catch(error) {
+    } catch (error) {
         console.error(error);
 
-        return new Error((error as {message: string }).message || 'Erro ao consultar o registro');
+        return new Error((error as { message: string }).message || 'Erro ao consultar o registro');
     }
 }
 
-const create = async (cliente: Omit<IDetalheClienteIn, 'id'>): Promise<string | Error> => { 
+const create = async (cliente: Omit<IDetalheClienteIn, 'id'>): Promise<string | Error> => {
     try {
         //const { data } = await Api.post<IDetalheCliente>('/clientes', cliente);
         const { data } = await Api.post<string>('/clientes', cliente);
@@ -70,30 +70,30 @@ const create = async (cliente: Omit<IDetalheClienteIn, 'id'>): Promise<string | 
         }
 
         return new Error('Erro ao consultar o registro');
-    } catch(error) {
+    } catch (error) {
         console.error(error);
 
-        return new Error((error as {message: string }).message || 'Erro ao consultar o registro');
+        return new Error((error as { message: string }).message || 'Erro ao consultar o registro');
     }
 }
 
 const updateById = async (id: string, dados: IDetalheClienteIn): Promise<void | Error> => {
     try {
-       await Api.put(`/clientes/${id}`, dados);
-    } catch(error) {
+        await Api.put(`/clientes/${id}`, dados);
+    } catch (error) {
         console.error(error);
 
-        return new Error((error as {message: string }).message || 'Erro ao alterar o registro');
+        return new Error((error as { message: string }).message || 'Erro ao alterar o registro');
     }
- }
+}
 
-const deleteById = async (id: string): Promise<void | Error> => { 
+const deleteById = async (id: string): Promise<void | Error> => {
     try {
         await Api.delete(`/clientes/${id}`);
-    } catch(error) {
+    } catch (error) {
         console.error(error);
 
-        return new Error((error as {message: string }).message || 'Erro ao excluir o registro');
+        return new Error((error as { message: string }).message || 'Erro ao excluir o registro');
     }
 }
 

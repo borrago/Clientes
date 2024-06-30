@@ -89,12 +89,14 @@ export const ListagemDeClientes:React.FC = () => {
                                 <TableRow key={row.id}>
                                     <TableCell>{row.nomeEmpresa}</TableCell>
                                     <TableCell>{row.porte}</TableCell>
-                                    <IconButton size="small" onClick={() => navigate(`/clientes/detalhe/${row.id}`)}>
-                                        <Icon>edit</Icon>
-                                    </IconButton>
-                                    <IconButton size="small" onClick={() => handleDelete(row.id)}>
-                                        <Icon>delete</Icon>
-                                    </IconButton>
+                                    <TableCell>
+                                        <IconButton size="small" onClick={() => navigate(`/clientes/detalhe/${row.id}`)}>
+                                            <Icon>edit</Icon>
+                                        </IconButton>
+                                        <IconButton size="small" onClick={() => handleDelete(row.id)}>
+                                            <Icon>delete</Icon>
+                                        </IconButton>
+                                    </TableCell>
                                 </TableRow>
                             ))
                         }

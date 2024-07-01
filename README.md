@@ -12,6 +12,7 @@ Esse projeto é uma implementação de cadastro de clientes seguindo princípios
 - .NET Core 8: Framework utilizado para o desenvolvimento da aplicação.
 - Entity Framework Core: Para interagir com o banco de dados relacional (SQL Server).
 - SQL Server: Banco de dados relacional para escrita e local para facilitar a execução.
+- Auto History: Utilizado biblioteca de Auto History para gravar histórico de dados ao alterar e incluir
 - MongoDB: Banco de dados NoSQL utilizado para leitura.
 - MediatR: Para mensageria interna e implementação do padrão CQRS.
 - Swagger: Para documentação e testes da API.

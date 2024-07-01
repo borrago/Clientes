@@ -2,11 +2,6 @@
 
 Esse projeto é uma implementação de API de clientes seguindo princípios dd Domain-Driven Design (DDD) e Command Query Responsibility Segregation (CQRS).
 
-# Execução simplificada
-
-1 - Instalar docker
-2 - Executar arquivo "up.bat"
-
 ## Tecnologias Utilizadas
 
 - .NET Core 8: Framework utilizado para o desenvolvimento da aplicação.
@@ -63,19 +58,8 @@ Clientes/
 │   |   ├── Events/
 │   |   └── ...
 ├── README.md
-├── .env-example
-├── Dockerfile
-├── nginx.conf
-├── docker-compose.yml
-└── up.bat
+└── Dockerfile
 ```
-
-### Configuração
-
-#### Pré-requisitos
-
-- Docker Desktop: [Docker Desktop](https://www.docker.com/products/docker-desktop)
-- Executar o arquivo up.bat para subir o projeto
 
 #### Testes Unitários
 
